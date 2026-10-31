@@ -1,4 +1,6 @@
-# Chánh Điện Tịnh Tâm
+# Chùa Online
+
+Bản chia sẻ của **Cherry**: [An-devAI/chua-online](https://github.com/An-devAI/chua-online).
 
 Chánh điện online 2.5D cho TikTok LIVE. Mỗi người xem bình luận là bước vào chánh điện, ngồi xuống bồ đoàn tụng kinh. Ai tặng quà sẽ được xướng tên hồi hướng bằng giọng đọc tiếng Việt. Có nhạc thiền, chuông, mõ và đọc kinh định kỳ.
 
