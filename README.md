@@ -118,11 +118,9 @@ GitHub và liên hệ: [An-devAI](https://github.com/An-devAI).
 
 ## Ủng hộ Cherry
 
-Dự án được chia sẻ miễn phí. Nếu thấy hữu ích, bạn có thể ủng hộ Cherry duy trì và phát triển thêm tính năng. Mã QR ngân hàng sẽ được bổ sung sau.
+Dự án được chia sẻ miễn phí. Nếu thấy hữu ích, bạn có thể ủng hộ Cherry duy trì và phát triển thêm tính năng qua mã QR ngân hàng bên dưới.
 
-<!-- Khi có ảnh QR, lưu vào assets/qr-cherry.png rồi thay dòng thông báo phía trên bằng:
-![QR ngân hàng ủng hộ Cherry](assets/qr-cherry.png)
--->
+<img src="QR/QR.jpeg" alt="QR ngân hàng ủng hộ Cherry" width="360">
 
 ## Giấy phép
 
