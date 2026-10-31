@@ -2,7 +2,7 @@
 
 Bản chia sẻ của **Cherry**: [An-devAI/chua-online](https://github.com/An-devAI/chua-online).
 
-Chánh điện online 2.5D cho TikTok LIVE. Mỗi người xem bình luận là bước vào chánh điện, ngồi xuống bồ đoàn tụng kinh. Ai tặng quà sẽ được xướng tên hồi hướng bằng giọng đọc tiếng Việt. Có nhạc thiền, chuông, mõ và đọc kinh định kỳ.
+Chính điện online 2.5D cho TikTok LIVE. Mỗi người xem bình luận là bước vào chính điện, ngồi xuống bồ đoàn tụng kinh. Ai tặng quà sẽ được xướng tên hồi hướng bằng giọng đọc tiếng Việt. Có nhạc thiền, chuông, mõ và đọc kinh định kỳ.
 
 Mã nguồn chia sẻ miễn phí (MIT). Có hai phần:
 
@@ -110,7 +110,7 @@ Việc sử dụng mã nguồn đồng nghĩa với việc bạn đã đọc và
 
 ## Nguồn gốc và người duy trì
 
-Bản tùy chỉnh này được phát triển từ [Chánh Điện Online của Kent Juno](https://github.com/kentjuno/chanh-dien-online). Thông báo bản quyền của mã nguồn gốc được giữ trong `LICENSE`.
+Bản tùy chỉnh này được phát triển từ [mã nguồn gốc của Kent Juno](https://github.com/kentjuno/chanh-dien-online). Thông báo bản quyền của mã nguồn gốc được giữ trong `LICENSE`.
 
 Người duy trì và phát triển bản tùy chỉnh: **Cherry**.
 

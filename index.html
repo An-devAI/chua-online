@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Chánh điện online: nhập pháp danh, an tọa tụng kinh cùng mọi người, nghe nhạc thiền.">
+<meta name="description" content="Chính điện online: nhập pháp danh, an tọa tụng kinh cùng mọi người, nghe nhạc thiền.">
 <meta name="theme-color" content="#0c0705">
-<meta property="og:title" content="Tịnh Tâm · Chánh Điện Online">
+<meta property="og:title" content="Tịnh Tâm · Chính Điện Online">
 <meta property="og:image" content="/assets/hall.jpg">
-<title>Tịnh Tâm · Chánh Điện Online</title>
+<title>Tịnh Tâm · Chính Điện Online</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/theme.css">
 <link rel="stylesheet" href="assets/visitor.css">
@@ -15,7 +15,7 @@
 <body>
 
 <div id="wrap"><div id="stage">
-  <canvas id="c" aria-label="Chánh điện với các nhân vật đang an tọa"></canvas>
+  <canvas id="c" aria-label="Chính điện với các nhân vật đang an tọa"></canvas>
   <div id="top" class="hud">
     <span class="chip" id="me" hidden><b id="meName"></b><span class="hint">đang tụng kinh</span></span>
     <span class="chip"><span class="n" id="count">0</span><span>phật tử</span></span>
@@ -39,15 +39,15 @@
   <div id="gate">
     <form id="gateForm">
       <span class="eyebrow">Một chút tĩnh lặng</span>
-      <h1>Chánh Điện<br><em>Tịnh Tâm</em></h1>
+      <h1>Chính Điện<br><em>Tịnh Tâm</em></h1>
       <p>Gác lại bộn bề, cùng an tọa trong không gian bình yên. Nhập pháp danh và chọn y phục của bạn.</p>
       <label for="dharma">Pháp danh</label>
       <input id="dharma" name="dharma" maxlength="20" autocomplete="nickname" placeholder="Ví dụ: Diệu Hạnh, Minh Tâm…" required>
       <label>Y phục</label>
       <div class="seg" id="skin" role="group" aria-label="Chọn y phục"></div>
       <div class="row">
-        <button type="submit" class="btn primary">Vào chánh điện</button>
-        <span class="hint">Chạm vào chánh điện để gửi lời nguyện.</span>
+        <button type="submit" class="btn primary">Vào chính điện</button>
+        <span class="hint">Chạm vào chính điện để gửi lời nguyện.</span>
       </div>
       <span class="hint simulation-note">Không gian mô phỏng · Quà tặng không phát sinh thanh toán</span>
       <div class="row">
@@ -207,21 +207,21 @@ function donate(v, coins, kind, text){
 let mySkin='man';
 Characters.choices(document.getElementById('skin'),mySkin);
 const enterButton=document.querySelector('#gateForm [type=submit]');
-enterButton.disabled=true; enterButton.textContent='Đang chuẩn bị chánh điện…';
-Characters.ready.then(()=>{ enterButton.disabled=false; enterButton.textContent='Vào chánh điện'; });
+enterButton.disabled=true; enterButton.textContent='Đang chuẩn bị chính điện…';
+Characters.ready.then(()=>{ enterButton.disabled=false; enterButton.textContent='Vào chính điện'; });
 document.getElementById('skin').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; mySkin=b.dataset.skin; for (const x of e.currentTarget.children) x.setAttribute('aria-pressed', x===b); });
 const gate=document.getElementById('gate'), form=document.getElementById('gateForm'), input=document.getElementById('dharma');
 try { const s=localStorage.getItem('phapdanh'); if(s) input.value=s; } catch(e){}
 form.addEventListener('submit', e=>{
   e.preventDefault();
   const name=input.value.trim().replace(/\s+/g,' ').slice(0,20); if(!name) return;
-  if(!freeSeat()){ showToast('Chánh điện đã kín chỗ, xin chờ một lát.'); return; }
+  if(!freeSeat()){ showToast('Chính điện đã kín chỗ, xin chờ một lát.'); return; }
   try{ localStorage.setItem('phapdanh',name); }catch(e){}
   audioStart();
   me = addVisitor(name, mySkin, false, true);
   gate.hidden=true; document.getElementById('me').hidden=false; document.getElementById('meName').textContent=name;
   for (const id of ['mute','leave','gifts','nextTrack']) document.getElementById(id).hidden=false;
-  say(name,' đã vào chánh điện'); showToast('Hoan nghênh '+name+' vào chánh điện'); ttsSpeak('Hoan nghênh '+name+' vào chánh điện');
+  say(name,' đã vào chính điện'); showToast('Hoan nghênh '+name+' vào chính điện'); ttsSpeak('Hoan nghênh '+name+' vào chính điện');
 });
 document.getElementById('gifts').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b||!me) return; donate(me, +b.dataset.coins, b.dataset.fx, SUTRA[Math.floor(Math.random()*SUTRA.length)]); });
 document.getElementById('nextTrack').addEventListener('click', ()=>{ if(AC) playTrack(trackIdx+1); });

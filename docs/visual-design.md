@@ -1,11 +1,11 @@
-# Bộ hình Chánh Điện của Cherry
+# Bộ hình Chính Điện của Cherry
 
 Giao diện dùng tông gỗ nâu, kem và vàng ấm; cảnh chùa và nhân vật mới được tạo bằng công cụ **imagegen tích hợp**. Các prompt cuối cùng được lưu trong [art-prompts.json](art-prompts.json).
 
 ## Xem trước
 
 - [Chọn một trong bảy nhân vật](previews/web-entry.jpg)
-- [Bảy nhân vật mới trong chánh điện](previews/seven-characters.jpg)
+- [Bảy nhân vật mới trong chính điện](previews/seven-characters.jpg)
 - [Overlay với 100 người](previews/overlay-100.jpg)
 - [Thông báo hồi hướng](previews/overlay-gift.jpg)
 - [Website trên điện thoại](previews/web-390.jpg)

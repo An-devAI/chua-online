@@ -1,4 +1,4 @@
-// Chánh Điện Tịnh Tâm — live server
+// Chính Điện Tịnh Tâm — live server
 // Runs on the streaming PC. Serves the overlay + control panel, listens to a TikTok LIVE room,
 // keeps the list of seated viewers, generates Vietnamese voice lines with Edge TTS and pushes
 // everything to the overlay over WebSocket.
@@ -21,7 +21,7 @@ const PORT = +process.env.PORT || 3000;
 
 /* ------------------------------------------------------------------ state */
 const settings = {
-  title: 'Chánh Điện Tịnh Tâm',
+  title: 'Chính Điện Tịnh Tâm',
   subtitle: 'Nam Mô A Di Đà Phật',
   voice: 'vi-VN-NamMinhNeural',      // or vi-VN-HoaiMyNeural
   pitch: -18,                        // Hz

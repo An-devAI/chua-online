@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "TikTok LIVE overlay server for Chánh Điện Tịnh Tâm",
+  "description": "TikTok LIVE overlay server for Chính Điện Tịnh Tâm",
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test"
