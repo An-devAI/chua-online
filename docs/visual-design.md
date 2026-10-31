@@ -38,6 +38,7 @@ Khi ảnh mới tải lỗi, bộ vẽ tự dùng hình gốc tương ứng. C�
 - Thông báo quà được ưu tiên hơn banner tụng kinh. Văn bản dài được xuống dòng hoặc rút gọn trong vùng thông báo.
 - Khi thiết bị bật giảm chuyển động, nhân vật an tọa ngay; tắt bước đi, hiệu ứng thở, cúi và hạt trang trí.
 - Website có vùng riêng phía dưới cho nút tương tác. Khung chọn y phục cuộn được trên màn hình thấp; mọi vai đều chọn được bằng bàn phím.
+- Bảng điều khiển xếp theo quy trình: kết nối/mở overlay → thao tác trên LIVE → cài đặt âm thanh. Cảnh và người đang an tọa nằm ở cột bên cạnh trên desktop. Mô phỏng và nhật ký thu gọn phía dưới; nút làm trống bồ đoàn đặt riêng dưới danh sách người ngồi. Trên điện thoại, các nhóm chuyển thành một cột.
 - Giao diện không hiển thị dòng ghi công cá nhân hoặc nguồn gốc; thông tin dự án nằm trong README và thông báo bản quyền MIT gốc được giữ trong `LICENSE`.
 
 ## Kiểm tra

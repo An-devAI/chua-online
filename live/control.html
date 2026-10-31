@@ -18,77 +18,100 @@
   </div>
 </header>
 
-<div class="grid">
-  <section class="card">
-    <h2>1 · Kết nối TikTok LIVE</h2>
-    <label for="uid">Username kênh đang live</label>
-    <div class="row connection-row"><input id="uid" placeholder="@tenkenhcuaban" autocomplete="off"><button class="primary" id="btnConnect">Kết nối</button><button id="btnDisconnect">Ngắt</button></div>
-    <p class="hint">Chỉ đọc sự kiện công khai của phòng live (bình luận, quà, tim). Không cần mật khẩu hay cookie TikTok. Phải bật LIVE trước rồi mới kết nối.</p>
-    <button class="gold" id="btnOverlay">Mở màn hình overlay 9:16</button>
-    <p class="hint">Trong TikTok LIVE Studio: Add source → Window capture → chọn cửa sổ overlay. Bấm "bật âm thanh" một lần trong cửa sổ đó.</p>
-    <h2>Trong sân chùa</h2>
-    <div id="people"><table><tbody id="peopleBody"><tr><td class="hint">Chưa có ai</td><td></td></tr></tbody></table></div>
+<main>
+  <section class="card connection-card" aria-labelledby="connectionHeading">
+    <div class="section-heading"><div><span class="eyebrow">Bắt đầu phiên LIVE</span><h2 id="connectionHeading">Kết nối &amp; mở màn hình</h2></div></div>
+    <div class="connection-actions">
+      <label for="uid">Username kênh đang live<input id="uid" placeholder="@tenkenhcuaban" autocomplete="off"></label>
+      <button class="primary" id="btnConnect">Kết nối TikTok</button>
+      <button id="btnDisconnect">Ngắt kết nối</button>
+      <button class="gold" id="btnOverlay">Mở overlay 9:16 ↗</button>
+    </div>
+    <p class="hint">Bật LIVE trên TikTok trước khi kết nối. Mở overlay và bấm “Bật âm thanh”, sau đó thêm cửa sổ vào TikTok LIVE Studio hoặc OBS.</p>
+    <p class="hint">Chỉ đọc bình luận, quà và tim công khai. Không cần mật khẩu hay cookie TikTok.</p>
   </section>
 
-  <section class="card">
-    <h2>2 · Thử tương tác</h2>
-    <label for="simName">Tên người xem</label>
-    <input id="simName" value="Minh An">
-    <label for="simText">Bình luận / lời nguyện</label>
-    <input id="simText" value="Nam mô A Di Đà Phật, cầu gia đình bình an">
-    <div class="row"><button id="btnChat">Gửi bình luận</button></div>
-    <div class="row">
-      <button data-gift="Hoa hồng" data-dia="1">Hoa hồng · 1</button>
-      <button data-gift="Đèn hoa sen" data-dia="30">Hoa sen · 30</button>
-      <button data-gift="Chuông vàng" data-dia="199">Chuông · 199</button>
-    </div>
-    <p class="hint">Gõ <b>nam · nữ · sư · ni · tiểu · bà · cao tăng</b> làm bình luận để đổi hình.</p>
-    <h2>Đổ người mẫu</h2>
-    <div class="row"><button data-fill="15">15</button><button data-fill="36">36</button><button data-fill="64">64</button><button data-fill="100">100</button></div>
-    <button class="red" id="btnClear">Làm trống toàn bộ bồ đoàn</button>
-    <h2>Bot tương tác mô phỏng</h2>
-    <div class="row">
-      <label>Số bot<input id="botN" type="number" min="1" max="100" value="12"></label>
-      <label>Nhịp<select id="botPace"><option value="slow">Chậm</option><option value="mid" selected>Vừa</option><option value="fast">Nhanh</option></select></label>
-      <button id="btnBots">Bật bot</button>
-    </div>
-    <p class="hint">Bot chỉ chạy trên màn hình của bạn, không phải người xem TikTok thật.</p>
-  </section>
+  <div class="workspace">
+    <div class="primary-column">
+      <section class="card" aria-labelledby="liveHeading">
+        <div class="section-heading"><div><span class="eyebrow">Trong khi phát</span><h2 id="liveHeading">Thao tác trên LIVE</h2></div></div>
+        <div class="quick-actions">
+          <button id="btnBell">🔔 Thỉnh chuông</button>
+          <button id="btnMo">Gõ mõ</button>
+          <button id="btnChant">Đọc kinh ngay</button>
+        </div>
+        <div class="sound-switches">
+          <label class="check"><input type="checkbox" id="music" checked> Nhạc nền</label>
+          <label class="check"><input type="checkbox" id="mo" checked> Tiếng mõ</label>
+          <label class="check"><input type="checkbox" id="autoChant" checked> Đọc kinh tự động</label>
+        </div>
+        <div class="field-group">
+          <label for="sayText">Lời nguyện / thông báo muốn đọc</label>
+          <textarea id="sayText">Nam mô Bổn Sư Thích Ca Mâu Ni Phật. Nguyện cầu cho tất cả chư vị Phật tử thân tâm thường an lạc, vạn sự cát tường.</textarea>
+          <div class="send-action"><span class="hint">Nội dung sẽ được đọc trên overlay.</span><button class="primary" id="btnSay">Phát lời đọc lên LIVE</button></div>
+        </div>
+      </section>
 
-  <section class="card">
-    <h2>3 · Giọng đọc · Nhạc · Chuông mõ</h2>
-    <div class="row">
-      <label>Giọng<select id="voice"><option value="vi-VN-NamMinhNeural">Nam Minh (nam)</option><option value="vi-VN-HoaiMyNeural">Hoài My (nữ)</option></select></label>
-      <label>Độ trầm (Hz)<input id="pitch" type="number" step="1" value="-18"></label>
-      <label>Tốc độ (%)<input id="rate" type="number" step="1" value="-20"></label>
+      <section class="card" aria-labelledby="audioHeading">
+        <h2 id="audioHeading">Cài đặt âm thanh</h2>
+        <label>Giọng đọc<select id="voice"><option value="vi-VN-NamMinhNeural">Nam Minh (nam)</option><option value="vi-VN-HoaiMyNeural">Hoài My (nữ)</option></select></label>
+        <div class="row">
+          <label>Độ trầm (Hz)<input id="pitch" type="number" step="1" value="-18"></label>
+          <label>Tốc độ (%)<input id="rate" type="number" step="1" value="-20"></label>
+        </div>
+        <div class="row">
+          <label>Nhịp mõ (BPM)<input id="moBpm" type="number" min="20" max="120" value="52"></label>
+          <label>Đọc kinh mỗi (phút)<input id="chantEveryMin" type="number" min="1" max="60" value="3"></label>
+        </div>
+      </section>
     </div>
-    <label for="sayText">Đọc thử / phát thông báo</label>
-    <textarea id="sayText">Nam mô Bổn Sư Thích Ca Mâu Ni Phật. Nguyện cầu cho tất cả chư vị Phật tử thân tâm thường an lạc, vạn sự cát tường.</textarea>
-    <div class="row"><button class="primary" id="btnSay">Phát lên live</button><button id="btnChant">Đọc kinh định kỳ ngay</button></div>
-    <div class="row tight">
-      <label class="check"><input type="checkbox" id="music" checked> Nhạc nền</label>
-      <label class="check"><input type="checkbox" id="mo" checked> Tiếng mõ</label>
-      <label class="check"><input type="checkbox" id="autoChant" checked> Đọc kinh tự động</label>
-    </div>
-    <div class="row">
-      <label>Nhịp mõ (BPM)<input id="moBpm" type="number" min="20" max="120" value="52"></label>
-      <label>Đọc kinh mỗi (phút)<input id="chantEveryMin" type="number" min="1" max="60" value="3"></label>
-    </div>
-    <div class="row"><button id="btnBell">🔔 Thỉnh chuông</button><button id="btnMo">Gõ mõ</button></div>
-    <h2>Cảnh</h2>
-    <label>Tên thiền đường<input id="title" value="Chính Điện Tịnh Tâm"></label>
-    <label>Dòng phụ<input id="subtitle" value="Nam Mô A Di Đà Phật"></label>
-    <div class="row">
-      <label>Số chỗ ngồi<select id="seatMode"><option value="auto">Tự mở rộng 24 → 100</option><option value="24">24</option><option value="36">36</option><option value="64">64</option><option value="100">100</option></select></label>
-    </div>
-    <label class="check"><input type="checkbox" id="joinOnEnter"> Người vào phòng cũng được ngồi (không cần bình luận)</label>
-  </section>
-</div>
 
-<section class="card log-card">
-  <h2>Nhật ký</h2>
-  <div id="log" aria-live="polite"></div>
-</section>
+    <aside class="secondary-column" aria-label="Cảnh và người đang an tọa">
+      <section class="card" aria-labelledby="sceneHeading">
+        <h2 id="sceneHeading">Cài đặt chính điện</h2>
+        <label>Tên thiền đường<input id="title" value="Chính Điện Tịnh Tâm"></label>
+        <label>Dòng phụ<input id="subtitle" value="Nam Mô A Di Đà Phật"></label>
+        <label>Số chỗ ngồi<select id="seatMode"><option value="auto">Tự mở rộng 24 → 100</option><option value="24">24</option><option value="36">36</option><option value="64">64</option><option value="100">100</option></select></label>
+        <label class="check"><input type="checkbox" id="joinOnEnter"> Người vào phòng cũng được ngồi (không cần bình luận)</label>
+      </section>
+      <section class="card" aria-labelledby="peopleHeading">
+        <h2 id="peopleHeading">Người đang an tọa</h2>
+        <div id="people"><table aria-label="Người xem và công đức"><tbody id="peopleBody"><tr><td class="hint">Chưa có ai</td><td></td></tr></tbody></table></div>
+        <div class="reset-zone"><button class="red" id="btnClear">Làm trống toàn bộ bồ đoàn</button><span class="hint">Xóa danh sách chỗ ngồi hiện tại.</span></div>
+      </section>
+    </aside>
+  </div>
+
+  <details class="card simulation-panel">
+    <summary><span>Thử tương tác &amp; người mẫu</span><span class="hint">Bình luận, quà và bot mô phỏng</span></summary>
+    <div class="simulation-grid">
+      <section class="field-group" aria-labelledby="simHeading">
+        <h3 id="simHeading">Bình luận &amp; quà tặng</h3>
+        <label for="simName">Tên người xem</label><input id="simName" value="Minh An">
+        <label for="simText">Bình luận / lời nguyện</label><input id="simText" value="Nam mô A Di Đà Phật, cầu gia đình bình an">
+        <button id="btnChat">Gửi bình luận mô phỏng</button>
+        <div class="row"><button data-gift="Hoa hồng" data-dia="1">Hoa hồng · 1</button><button data-gift="Đèn hoa sen" data-dia="30">Hoa sen · 30</button><button data-gift="Chuông vàng" data-dia="199">Chuông · 199</button></div>
+        <p class="hint">Gõ <b>nam · nữ · sư · ni · tiểu · bà · cao tăng</b> để đổi hình.</p>
+      </section>
+      <section class="field-group" aria-labelledby="demoHeading">
+        <h3 id="demoHeading">Thêm người mẫu</h3>
+        <div class="row"><button data-fill="15">15 người</button><button data-fill="36">36 người</button><button data-fill="64">64 người</button><button data-fill="100">100 người</button></div>
+        <h3>Bot tương tác</h3>
+        <div class="row">
+          <label>Số bot<input id="botN" type="number" min="1" max="100" value="12"></label>
+          <label>Nhịp<select id="botPace"><option value="slow">Chậm</option><option value="mid" selected>Vừa</option><option value="fast">Nhanh</option></select></label>
+        </div>
+        <button id="btnBots">Bật bot</button>
+        <p class="hint">Dữ liệu mô phỏng chỉ xuất hiện trong công cụ này, không tạo người xem hay tương tác thật trên TikTok.</p>
+      </section>
+    </div>
+  </details>
+
+  <details class="card log-card">
+    <summary><span>Nhật ký kết nối</span><span class="hint">Xem sự kiện và thông báo lỗi</span></summary>
+    <div id="log" aria-live="polite"></div>
+  </details>
+</main>
 
 <script>
 const $ = id => document.getElementById(id);

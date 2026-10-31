@@ -24,11 +24,11 @@ npm start
 ```
 
 1. Mở `http://localhost:3000/live/control.html` (bảng điều khiển).
-2. Bấm **Mở màn hình overlay 9:16**, rồi bấm **Bật âm thanh** một lần trong cửa sổ đó (trình duyệt chặn tự phát tiếng).
+2. Bấm **Mở overlay 9:16**, rồi bấm **Bật âm thanh** một lần trong cửa sổ đó (trình duyệt chặn tự phát tiếng).
 3. Trong TikTok LIVE Studio: *Add source → Window capture* → chọn cửa sổ overlay. Với OBS thì dùng *Browser source* trỏ tới `http://localhost:3000/live/overlay.html`, kích thước 1080×1920.
 4. Bật LIVE trên TikTok, nhập `@username` vào bảng điều khiển, bấm **Kết nối**.
 
-Chưa live vẫn thử được: dùng **Thử tương tác**, **Đổ người mẫu 15/36/64/100** hoặc **Bot mô phỏng**.
+Chưa LIVE vẫn thử được: mở nhóm **Thử tương tác & người mẫu** ở dưới bảng điều khiển để gửi bình luận, tặng quà mô phỏng, thêm 15/36/64/100 người hoặc bật bot. Nhóm **Nhật ký kết nối** nằm cuối trang, bấm để xem khi cần.
 
 Giữ cửa sổ terminal chạy server trong suốt phiên LIVE. Nhấn `Ctrl+C` để dừng. Cài đặt và danh sách người xem hiện chỉ lưu trong RAM, sẽ đặt lại khi khởi động lại server.
 
