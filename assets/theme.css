@@ -1,0 +1,18 @@
+:root {
+  --bg:#17110d; --fg:#f7edda; --muted:#ccb99c; --gold:#dfb875; --red:#884736;
+  --panel:rgba(33,24,18,.90); --line:rgba(223,184,117,.32);
+  --display:"Noto Serif",Georgia,serif; --body:"Be Vietnam Pro",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+a{color:var(--gold);text-underline-offset:3px}
+button,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button{transition:background .18s,border-color .18s,transform .18s}
+button:active{transform:translateY(1px)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid #f3d49c;outline-offset:3px}
+button:disabled{opacity:.55;cursor:wait}
+.eyebrow{font:500 11px var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.credit{font:11px/1.8 var(--body);color:var(--muted)}
+.credit a{color:inherit}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

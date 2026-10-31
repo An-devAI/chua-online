@@ -9,13 +9,15 @@ Mã nguồn chia sẻ miễn phí (MIT). Có hai phần:
 | `index.html`, `assets/` | Bản web tĩnh cho mọi người tự vào ngồi tụng (đăng lên Cloudflare Pages) |
 | `live/` | Bộ công cụ phát LIVE: server Node, overlay 9:16, bảng điều khiển |
 
+Bản Cherry có cảnh chùa ấm sáng và bảy nhóm nhân vật mới, đều có động tác đi vào và ngồi xuống. Xem [ảnh giao diện, bộ hình và hướng dẫn tùy chỉnh](docs/visual-design.md).
+
 ## Chạy bộ LIVE trên máy phát
 
-Cần Node.js 20 trở lên.
+Cần Node.js 20 trở lên và npm. Tải ZIP của dự án rồi giải nén, hoặc clone repository của bản bạn muốn dùng.
 
 ```bash
 cd live
-npm install
+npm ci
 npm start
 ```
 
@@ -25,6 +27,39 @@ npm start
 4. Bật LIVE trên TikTok, nhập `@username` vào bảng điều khiển, bấm **Kết nối**.
 
 Chưa live vẫn thử được: dùng **Thử tương tác**, **Đổ người mẫu 15/36/64/100** hoặc **Bot mô phỏng**.
+
+Giữ cửa sổ terminal chạy server trong suốt phiên LIVE. Nhấn `Ctrl+C` để dừng. Cài đặt và danh sách người xem hiện chỉ lưu trong RAM, sẽ đặt lại khi khởi động lại server.
+
+### Tùy chỉnh và chia sẻ bản của bạn
+
+- Đổi tiêu đề, phụ đề, giọng đọc, nhạc và số chỗ ngồi ngay trong bảng điều khiển.
+- Thay nhạc trong `assets/music/` nếu muốn dùng tài nguyên riêng. Khi thay nhân vật mới trong `assets/characters/`, cập nhật vùng ảnh và tỷ lệ trong manifest theo [hướng dẫn bộ hình](docs/visual-design.md).
+- Khi chia sẻ mã nguồn, gửi kèm `index.html`, `assets/`, thư mục `live/`, `README.md`, `_headers` và `LICENSE`. Không gửi `node_modules/`, `live/tts/`, `.env` hay nhật ký. Người nhận chạy `npm ci` để cài đúng các phiên bản trong lockfile.
+- Giữ thông báo bản quyền MIT gốc trong `LICENSE`; ghi người duy trì bản tùy chỉnh và liên hệ trong README.
+
+### Web tĩnh
+
+Đưa `index.html`, `assets/` và `_headers` lên dịch vụ hosting tĩnh như Cloudflare Pages, không cần bước build. Bản này chạy độc lập trong trình duyệt, có tương tác mô phỏng; người truy cập **không ngồi chung một phòng** và bản này không kết nối sự kiện TikTok. Bộ LIVE trong `live/` cần server Node chạy trên máy phát.
+
+### Kiểm tra trước khi chia sẻ
+
+```bash
+cd live
+npm ci
+npm test
+```
+
+Sau đó mở bảng điều khiển và overlay, bật âm thanh, thử thêm 100 người mẫu, bình luận, tặng quà và xóa chỗ ngồi. Kết nối TikTok và giọng đọc trực tuyến cần kiểm tra riêng với Internet và kênh đang LIVE.
+
+### Xử lý sự cố thường gặp
+
+| Hiện tượng | Cách xử lý |
+|---|---|
+| `node` hoặc `npm` không được nhận diện | Cài Node.js từ 20 trở lên rồi mở lại terminal. |
+| `EADDRINUSE` | Dừng server cũ hoặc đổi cổng. macOS/Linux: `PORT=3001 npm start`; PowerShell: `$env:PORT=3001; npm start`. Sau đó dùng cổng mới cho cả bảng điều khiển và overlay. |
+| Overlay không có tiếng | Bấm **Bật âm thanh** trong overlay và kiểm tra âm lượng của nguồn trong phần mềm phát. |
+| Không kết nối được TikTok | Kiểm tra username, kênh đã LIVE và kết nối Internet; thư viện cộng đồng có thể cần cập nhật khi TikTok thay đổi. |
+| Không đọc được giọng | Kiểm tra Internet và nhật ký trong bảng điều khiển. Yêu cầu tạo giọng đọc quá 30 giây sẽ bị bỏ qua để hàng đợi tiếp tục chạy. |
 
 ### Người xem làm được gì
 
@@ -51,7 +86,7 @@ Các lớp trên đã được thử: đường dẫn `../`, `%2e%2e`, `.git/con
 
 - `tiktok-live-connector` là thư viện cộng đồng, không phải API chính thức của TikTok. Nó có thể ngừng chạy khi TikTok đổi hệ thống. Kiểm tra điều khoản TikTok trước khi dùng cho kênh của bạn.
 - Giọng đọc dùng dịch vụ Read Aloud của Microsoft Edge qua mạng (giọng Nam Minh, Hoài My). Máy phát cần có Internet.
-- Hình ảnh trong `assets/` được tạo bằng Google Flow, nhạc nền tạo bằng Gemini. Kiểm tra điều khoản của các dịch vụ đó trước khi dùng thương mại, hoặc thay bằng tài nguyên của bạn.
+- Cảnh và nhân vật mới trong `assets/scene/`, `assets/characters/` được tạo bằng imagegen tích hợp; prompt được lưu trong `docs/art-prompts.json`. Hình và hiệu ứng gốc được tạo bằng Google Flow, nhạc nền tạo bằng Gemini. Kiểm tra điều khoản của các dịch vụ đó trước khi dùng thương mại, hoặc thay bằng tài nguyên của bạn.
 
 ## Miễn trừ trách nhiệm
 
@@ -71,19 +106,21 @@ Việc sử dụng mã nguồn đồng nghĩa với việc bạn đã đọc và
 
 > **Disclaimer (EN):** This project is shared free of charge for educational purposes only and is provided "AS IS", without warranty of any kind. Anyone who uses, modifies or redistributes it is solely responsible for their own content, streams, donations, compliance with TikTok and other platforms' terms, and applicable laws. The author is not affiliated with, does not endorse, and accepts no liability for any channel, account, product or activity built with this code, nor for any direct or indirect damages.
 
-## Ủng hộ tác giả
+## Nguồn gốc và người duy trì
 
-Dự án chia sẻ miễn phí. Nếu thấy hữu ích và muốn góp chút công đức để tác giả duy trì và làm thêm tính năng, bạn có thể chuyển khoản:
+Bản tùy chỉnh này được phát triển từ [Chánh Điện Online của Kent Juno](https://github.com/kentjuno/chanh-dien-online). Thông báo bản quyền của mã nguồn gốc được giữ trong `LICENSE`.
 
-| | |
-|---|---|
-| Ngân hàng | **MB Bank** |
-| Số tài khoản | **999979798886** |
-| Chủ tài khoản | **HUYNH HUU NHAN** |
+Người duy trì và phát triển bản tùy chỉnh: **Cherry**.
 
-![QR chuyển khoản MB Bank](https://img.vietqr.io/image/MB-999979798886-compact2.png?accountName=HUYNH%20HUU%20NHAN&addInfo=Ung%20ho%20Chanh%20Dien%20Online)
+GitHub và liên hệ: [An-devAI](https://github.com/An-devAI).
 
-Xin cảm ơn và chúc bạn thân tâm an lạc. Nam mô A Di Đà Phật.
+## Ủng hộ Cherry
+
+Dự án được chia sẻ miễn phí. Nếu thấy hữu ích, bạn có thể ủng hộ Cherry duy trì và phát triển thêm tính năng. Mã QR ngân hàng sẽ được bổ sung sau.
+
+<!-- Khi có ảnh QR, lưu vào assets/qr-cherry.png rồi thay dòng thông báo phía trên bằng:
+![QR ngân hàng ủng hộ Cherry](assets/qr-cherry.png)
+-->
 
 ## Giấy phép
 

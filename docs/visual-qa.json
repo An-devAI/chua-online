@@ -1,0 +1,91 @@
+[
+  {
+    "scenario": "seven roles walk and sit",
+    "passed": true,
+    "roles": [
+      "man",
+      "woman",
+      "granny",
+      "monk",
+      "nun",
+      "child",
+      "master"
+    ]
+  },
+  {
+    "scenario": "crowd 24",
+    "passed": true,
+    "count": 24,
+    "capacity": 24,
+    "seats": 24
+  },
+  {
+    "scenario": "crowd 36",
+    "passed": true,
+    "count": 36,
+    "capacity": 36,
+    "seats": 36
+  },
+  {
+    "scenario": "crowd 64",
+    "passed": true,
+    "count": 64,
+    "capacity": 64,
+    "seats": 64
+  },
+  {
+    "scenario": "crowd 100",
+    "passed": true,
+    "count": 100,
+    "capacity": 100,
+    "seats": 100
+  },
+  {
+    "scenario": "gift has priority over chant and long text fits",
+    "passed": true
+  },
+  {
+    "scenario": "reduced motion skips walking and clears decoration",
+    "passed": true
+  },
+  {
+    "scenario": "overlay runtime exceptions",
+    "errors": []
+  },
+  {
+    "scenario": "web 360px: select, enter, sit, leave, controls fit",
+    "passed": true
+  },
+  {
+    "scenario": "web 390px: select, enter, sit, leave, controls fit",
+    "passed": true
+  },
+  {
+    "scenario": "web 1440px: select, enter, sit, leave, controls fit",
+    "passed": true
+  },
+  {
+    "scenario": "control 360px has all controls and no horizontal overflow",
+    "passed": true
+  },
+  {
+    "scenario": "control 900px has all controls and no horizontal overflow",
+    "passed": true
+  },
+  {
+    "scenario": "long title/subtitle stay within header; gift clears teacher labels; disconnect indicator",
+    "passed": true
+  },
+  {
+    "scenario": "browser blocks all new art and falls back to original images without runtime exceptions",
+    "passed": true
+  },
+  {
+    "scenario": "reduced motion seats immediately after a grid resize",
+    "passed": true
+  },
+  {
+    "scenario": "changing character while walking preserves the walk animation",
+    "passed": true
+  }
+]

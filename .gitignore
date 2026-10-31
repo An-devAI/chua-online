@@ -5,3 +5,6 @@ live/tts/
 .env.*
 .DS_Store
 Thumbs.db
+/.aws
+/.agents
+/.codex

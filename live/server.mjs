@@ -112,19 +112,30 @@ function say(text, meta = {}){ if (ttsQueue.length >= 15) { addLog('Hàng đợi
 async function pumpTTS(){
   if (ttsBusy || !ttsQueue.length) return; ttsBusy = true;
   const { text, meta } = ttsQueue.shift();
+  const tts = new MsEdgeTTS();
+  let timeout;
   try {
     const file = `tts_${Date.now()}_${++ttsSeq}.mp3`;
-    const tts = new MsEdgeTTS();
-    await tts.setMetadata(settings.voice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
-    const { audioStream } = tts.toStream(esc(text), { pitch: `${settings.pitch >= 0 ? '+' : ''}${settings.pitch}Hz`, rate: `${settings.rate >= 0 ? '+' : ''}${settings.rate}%` });
-    const chunks = [];
-    await new Promise((res, rej) => { audioStream.on('data', c => chunks.push(c)); audioStream.on('close', res); audioStream.on('error', rej); });
-    try { tts.close(); } catch {}
-    fs.writeFileSync(path.join(TTS_DIR, file), Buffer.concat(chunks));
+    const voice = settings.voice, pitch = settings.pitch, rate = settings.rate;
+    const audio = await Promise.race([
+      (async () => {
+        await tts.setMetadata(voice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
+        const { audioStream } = tts.toStream(esc(text), { pitch: `${pitch >= 0 ? '+' : ''}${pitch}Hz`, rate: `${rate >= 0 ? '+' : ''}${rate}%` });
+        const chunks = [];
+        for await (const chunk of audioStream) chunks.push(chunk);
+        return Buffer.concat(chunks);
+      })(),
+      new Promise((_, reject) => { timeout = setTimeout(() => reject(new Error('Quá thời gian tạo giọng đọc (30 giây)')), 30000); }),
+    ]);
+    await fs.promises.writeFile(path.join(TTS_DIR, file), audio);
     broadcast({ t:'tts', url: `/live/tts/${file}`, text, ...meta });
     const old = fs.readdirSync(TTS_DIR).sort(); while (old.length > 40) { try { fs.unlinkSync(path.join(TTS_DIR, old.shift())); } catch {} }
   } catch (e) { addLog('TTS lỗi: ' + (e?.message || e)); }
-  ttsBusy = false; setTimeout(pumpTTS, 50);
+  finally {
+    clearTimeout(timeout);
+    try { tts.close(); } catch {}
+    ttsBusy = false; setTimeout(pumpTTS, 50);
+  }
 }
 
 const CHANTS = [
@@ -278,7 +289,10 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream',
       'Cache-Control': p.startsWith('/live/tts/') ? 'no-store' : 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' });
     if (req.method === 'HEAD') { res.end(); return; }
-    fs.createReadStream(file).pipe(res);
+    const stream = fs.createReadStream(file);
+    stream.on('error', () => res.destroy());
+    res.on('close', () => stream.destroy());
+    stream.pipe(res);
   });
 });
 const wss = new WebSocketServer({ server, path: '/ws', maxPayload: 64 * 1024,

@@ -5,47 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bảng điều khiển · Chánh Điện Tịnh Tâm</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap">
-<style>
-/* Layout: three columns of cards (connection · interaction · sound/scene) over a status bar; collapses to one column on narrow windows. */
-:root{
-  --bg:#140b07; --card:#1f120b; --card2:#2a180e; --fg:#f3e5cb; --muted:#b39a78; --line:#4a2e1a;
-  --gold:#e2b04f; --red:#8f2a1a; --green:#2f7a4a; --display:"Noto Serif",Georgia,serif; --body:"Be Vietnam Pro",system-ui,sans-serif;
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 var(--body);padding:18px max(16px,env(safe-area-inset-right)) 30px max(16px,env(safe-area-inset-left))}
-header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px}
-h1{font-family:var(--display);font-size:24px;margin:0;color:var(--gold)}
-.status{display:flex;gap:10px;flex-wrap:wrap}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;font-variant-numeric:tabular-nums}
-.chip.ok{border-color:var(--green);color:#9fe0b4}.chip.bad{border-color:#a33;color:#f3a3a3}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px;align-items:start}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;min-width:0}
-.card h2{margin:0;font:600 15px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--gold)}
-.hint{color:var(--muted);font-size:12px}
-label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
-input,select,textarea{font:inherit;color:var(--fg);background:#0f0805;border:1px solid var(--line);border-radius:9px;padding:8px 10px;width:100%;min-width:0}
-textarea{resize:vertical;min-height:60px}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.row>*{flex:1 1 0;min-width:0}
-.row.tight>*{flex:0 0 auto}
-button{font:600 13px var(--body);color:var(--fg);background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:9px 12px;cursor:pointer}
-button:hover{border-color:var(--gold)}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
-button.primary{background:var(--green);border-color:#3f9a60}
-button.gold{background:#6b4a14;border-color:var(--gold)}
-button.red{background:var(--red);border-color:#b84a33}
-.check{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--fg)}
-.check input{width:auto}
-#people{max-height:320px;overflow:auto;border:1px solid var(--line);border-radius:10px}
-#people table{width:100%;border-collapse:collapse;font-size:13px}
-#people td{padding:5px 8px;border-bottom:1px solid #2e1c10}
-#people td:last-child{text-align:right;color:var(--gold);font-variant-numeric:tabular-nums}
-#log{height:220px;overflow:auto;background:#0b0604;border:1px solid var(--line);border-radius:10px;padding:8px;font:12px/1.5 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
-</style>
+<link rel="stylesheet" href="/assets/theme.css">
+<link rel="stylesheet" href="/assets/control.css">
 </head>
 <body>
 <header>
-  <h1>Bảng điều khiển · Chánh Điện Tịnh Tâm</h1>
+  <div class="brand"><span class="eyebrow">Không gian an lành · Cherry</span><h1>Chánh Điện Tịnh Tâm</h1><span class="session-note">Bảng điều khiển phiên LIVE của bạn</span></div>
   <div class="status">
     <span class="chip" id="srv">Server: …</span>
     <span class="chip" id="tt">TikTok: chưa kết nối</span>
@@ -57,7 +22,7 @@ button.red{background:var(--red);border-color:#b84a33}
   <section class="card">
     <h2>1 · Kết nối TikTok LIVE</h2>
     <label for="uid">Username kênh đang live</label>
-    <div class="row"><input id="uid" placeholder="@tenkenhcuaban" autocomplete="off"><button class="primary" id="btnConnect">Kết nối</button><button id="btnDisconnect">Ngắt</button></div>
+    <div class="row connection-row"><input id="uid" placeholder="@tenkenhcuaban" autocomplete="off"><button class="primary" id="btnConnect">Kết nối</button><button id="btnDisconnect">Ngắt</button></div>
     <p class="hint">Chỉ đọc sự kiện công khai của phòng live (bình luận, quà, tim). Không cần mật khẩu hay cookie TikTok. Phải bật LIVE trước rồi mới kết nối.</p>
     <button class="gold" id="btnOverlay">Mở màn hình overlay 9:16</button>
     <p class="hint">Trong TikTok LIVE Studio: Add source → Window capture → chọn cửa sổ overlay. Bấm "bật âm thanh" một lần trong cửa sổ đó.</p>
@@ -87,7 +52,7 @@ button.red{background:var(--red);border-color:#b84a33}
       <label>Nhịp<select id="botPace"><option value="slow">Chậm</option><option value="mid" selected>Vừa</option><option value="fast">Nhanh</option></select></label>
       <button id="btnBots">Bật bot</button>
     </div>
-    <p class="hint">Bot chỉ chạy trên màn hình của anh, không phải người xem TikTok thật.</p>
+    <p class="hint">Bot chỉ chạy trên màn hình của bạn, không phải người xem TikTok thật.</p>
   </section>
 
   <section class="card">
@@ -120,17 +85,18 @@ button.red{background:var(--red);border-color:#b84a33}
   </section>
 </div>
 
-<section class="card" style="margin-top:16px">
+<section class="card log-card">
   <h2>Nhật ký</h2>
   <div id="log" aria-live="polite"></div>
 </section>
-<footer class="hint" style="margin-top:14px;text-align:center">Chánh Điện Online · mã nguồn mở MIT · thực hiện bởi Kent Juno</footer>
+<footer class="credit">Bản tùy chỉnh bởi <a href="https://github.com/An-devAI" target="_blank" rel="noopener noreferrer">Cherry</a><br>Nguồn gốc: Kent Juno · Mã nguồn mở MIT</footer>
 
 <script>
 const $ = id => document.getElementById(id);
 let ws = null;
 const send = (cmd, extra={}) => ws?.readyState===1 && ws.send(JSON.stringify({ t:'ctl', cmd, ...extra }));
-function logLine(s){ const el=$('log'); el.textContent += s + '\n'; el.scrollTop = el.scrollHeight; }
+const logLines = [];
+function logLine(s){ const el=$('log'); logLines.push(s); if (logLines.length>300) logLines.shift(); el.textContent = logLines.join('\n') + '\n'; el.scrollTop = el.scrollHeight; }
 const SETTING_IDS = ['voice','pitch','rate','music','mo','autoChant','moBpm','chantEveryMin','title','subtitle','seatMode','joinOnEnter'];
 function fillSettings(s){ for (const k of SETTING_IDS){ const el=$(k); if (!el || s[k]===undefined) continue; if (el.type==='checkbox') el.checked=!!s[k]; else el.value=s[k]; } }
 function readSettings(){ const o={}; for (const k of SETTING_IDS){ const el=$(k); o[k] = el.type==='checkbox' ? el.checked : el.type==='number' ? +el.value : el.value; } return o; }
@@ -147,13 +113,13 @@ function setTT(st){
   el.textContent = st.status==='connected' ? `TikTok: @${st.uniqueId} ✓` : st.status==='connecting' ? `TikTok: đang kết nối @${st.uniqueId}…` : st.status==='error' ? 'TikTok: lỗi kết nối' : 'TikTok: chưa kết nối';
 }
 function connect(){
-  ws = new WebSocket(`ws://${location.host}/ws?role=control`);
+  ws = new WebSocket(`${location.protocol==='https:'?'wss:':'ws:'}//${location.host}/ws?role=control`);
   ws.onopen = () => { $('srv').textContent='Server: đang chạy'; $('srv').className='chip ok'; };
   ws.onclose = () => { $('srv').textContent='Server: mất kết nối'; $('srv').className='chip bad'; setTimeout(connect, 2000); };
   ws.onmessage = e => {
     const m = JSON.parse(e.data);
     if (m.t==='state'){ fillSettings(m.settings); setTT(m.tiktok); people.clear(); for (const v of m.viewers) people.set(v.id,v); renderPeople(); }
-    else if (m.t==='logs'){ $('log').textContent=''; m.lines.forEach(logLine); }
+    else if (m.t==='logs'){ logLines.length=0; $('log').textContent=''; m.lines.forEach(logLine); }
     else if (m.t==='log') logLine(m.line);
     else if (m.t==='tiktok') setTT(m);
     else if (m.t==='join'){ people.set(m.v.id,m.v); renderPeople(); }
